@@ -126,7 +126,7 @@ const App = () => {
             <div>
               <img
                 src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
-                style={{ width: 100 }}
+                style={{ width: 200 }}
                 alt="glyph"
               />
               <em>({current[0]}) </em>
