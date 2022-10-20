@@ -121,35 +121,37 @@ const App = () => {
       ) : (
         <div>
           {current[0] && (
-            <div>
+            <div className="dialog">
               <img
                 src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
                 alt="glyph"
               />
               {import.meta.env.DEV && <em>({current[0]}) </em>}
+              {current[1] === 0 && <h1>{current[0]}</h1>}
             </div>
           )}
 
-          {current[1] === 0 && <h1>{current[0]}</h1>}
+          <div className="dialog">
+            {current[1] > 0 && (
+              <input
+                type="text"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") okay(current, learning);
+                }}
+                placeholder="What letter is it?"
+              />
+            )}
 
-          {current[1] > 0 && (
-            <input
-              type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") okay(current, learning);
+            <button
+              onClick={() => {
+                okay(current, learning);
               }}
-            />
-          )}
-
-          <button
-            onClick={() => {
-              okay(current, learning);
-            }}
-          >
-            Okay
-          </button>
+            >
+              Okay
+            </button>
+          </div>
         </div>
       )}
       <h3 style={{ letterSpacing: "5pt" }}>
