@@ -1,22 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // optimizeDeps: {
-  //   include: [
-  //     "gun",
-  //     "gun/gun",
-  //     "gun/sea",
-  //     "gun/sea.js",
-  //     "gun/lib/then",
-  //     "gun/lib/webrtc",
-  //     "gun/lib/radix",
-  //     "gun/lib/radisk",
-  //     "gun/lib/store",
-  //     "gun/lib/rindexed",
-  //   ],
-  // },
-
-  plugins: [react()],
+  base: "/fringe-learn-glyphs/",
+  plugins: [VitePWA({ registerType: "autoUpdate" }), react()],
 });
