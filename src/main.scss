@@ -26,12 +26,6 @@ body {
 
 main {
   flex-grow: 1;
-
-  a {
-    color: #7860ff;
-    text-decoration: none;
-    border-bottom: 2px solid #7860ff;
-  }
 }
 
 .red {
@@ -98,10 +92,6 @@ footer {
   }
 }
 
-.column {
-  width: 50%;
-}
-
 header {
   -webkit-font-feature-settings: "smcp";
   font-feature-settings: "smcp";
@@ -116,16 +106,4 @@ header {
   background-color: #fff;
   padding: 10px;
   z-index: 2;
-}
-
-.a {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-
-  .c {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-  }
 }
