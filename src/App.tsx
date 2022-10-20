@@ -121,8 +121,17 @@ const App = () => {
       ) : (
         <div>
           {current[1] === 0 && <h1>{current[0]}</h1>}
-          <h2>{current[0]}</h2>
-          <strong>{current[1]}</strong>
+
+          {current[0] && (
+            <div>
+              <img
+                src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
+                style={{ width: 100 }}
+                alt="glyph"
+              />
+              <em>({current[0]}) </em>
+            </div>
+          )}
 
           {current[1] > 0 && (
             <input
@@ -144,6 +153,9 @@ const App = () => {
           </button>
         </div>
       )}
+      <h3 style={{ letterSpacing: "5pt" }}>
+        {Object.keys(learning).toString()}
+      </h3>
       {JSON.stringify(learning).toString()}
     </div>
   );
