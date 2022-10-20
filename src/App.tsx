@@ -52,7 +52,7 @@ const App = () => {
 
     const check = (key: string, a: any) => {
       if (answer.toUpperCase() === key) {
-        console.log("OK");
+        // console.log("OK");
         setAlert(1);
 
         if (
