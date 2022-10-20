@@ -1,5 +1,6 @@
 import { useState } from "react";
 import stats from "./utils/stats.json";
+import "./main.scss";
 
 const App = () => {
   const [start, setStart] = useState(false);
@@ -107,56 +108,63 @@ const App = () => {
   };
 
   return (
-    <div style={{ backgroundColor: alert === 0 && "red" }}>
-      App
-      {!start ? (
-        <button
-          onClick={() => {
-            setStart(true);
-            addNew();
-          }}
+    <div className="App">
+      <header>Fringe Learn Glyphs</header>
+      <main>
+        <div
+          className="container"
+          style={{ backgroundColor: alert === 0 && "red" }}
         >
-          Start
-        </button>
-      ) : (
-        <div>
-          {current[1] === 0 && <h1>{current[0]}</h1>}
-
-          {current[0] && (
+          {!start ? (
+            <button
+              onClick={() => {
+                setStart(true);
+                addNew();
+              }}
+            >
+              Start
+            </button>
+          ) : (
             <div>
-              <img
-                src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
-                style={{ width: 200 }}
-                alt="glyph"
-              />
-              <em>({current[0]}) </em>
+              {current[0] && (
+                <div>
+                  <img
+                    src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
+                    alt="glyph"
+                  />
+                  <em>({current[0]}) </em>
+                </div>
+              )}
+
+              {current[1] === 0 && <h1>{current[0]}</h1>}
+
+              {current[1] > 0 && (
+                <input
+                  type="text"
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") okay(current, learning);
+                  }}
+                />
+              )}
+
+              <button
+                onClick={() => {
+                  okay(current, learning);
+                }}
+              >
+                Okay
+              </button>
             </div>
           )}
-
-          {current[1] > 0 && (
-            <input
-              type="text"
-              value={answer}
-              onChange={(e) => setAnswer(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") okay(current, learning);
-              }}
-            />
-          )}
-
-          <button
-            onClick={() => {
-              okay(current, learning);
-            }}
-          >
-            Okay
-          </button>
+          <h3 style={{ letterSpacing: "5pt" }}>
+            {learning && Object.keys(learning).toString()}
+          </h3>
+          {/* {JSON.stringify(learning).toString()} */}
         </div>
-      )}
-      <h3 style={{ letterSpacing: "5pt" }}>
-        {Object.keys(learning).toString()}
-      </h3>
-      {JSON.stringify(learning).toString()}
+      </main>
+      <footer>Alpha v0.0.1</footer>
     </div>
   );
 };
