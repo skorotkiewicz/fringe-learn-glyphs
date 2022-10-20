@@ -1,44 +1,7 @@
 import { useState } from "react";
-
-/*
-
-na początku pokazuje 3 nowe litery w celu nauki, po kliknieciu na okay zmienia status z 0 na 1 co pokazuje, ze zostało pokazane
-jezeli nie ma juz zadnych nowych liter z statusem 0, zaczynaj odpytywac losowo, poprawna odpowiedz dodaje do statusu +1 a zła odpowiedz odejmuje, wiec jak znów wylądje na zero, to pokazuje ponownie w celu nauki. jezeli uzytkownik kazdą nową literkę odpowie na 5 punktów, to dodaje się dodatkowe 3 nowe litery.
-
-gdy wszystkie literki zostaną dodane, odpowiadaj losowo na kazdą literkę.
-
-*/
+import stats from "./utils/stats.json";
 
 const App = () => {
-  const stats = {
-    A: 0,
-    B: 0,
-    C: 0,
-    D: 0,
-    E: 0,
-    F: 0,
-    G: 0,
-    H: 0,
-    I: 0,
-    J: 0,
-    K: 0,
-    L: 0,
-    M: 0,
-    N: 0,
-    O: 0,
-    P: 0,
-    Q: 0,
-    R: 0,
-    S: 0,
-    T: 0,
-    U: 0,
-    V: 0,
-    W: 0,
-    X: 0,
-    Y: 0,
-    Z: 0,
-  };
-
   const [start, setStart] = useState(false);
   const [learning, setLearning] = useState({});
   const [added, setAdded] = useState({});
@@ -48,6 +11,7 @@ const App = () => {
 
   const keys = Object.entries(stats); // keys
 
+  // Add new letter to learning object store
   const addNew = (howManyNew = 3) => {
     let count = 0;
     const letters = Object.keys(learning); // keys
@@ -63,6 +27,7 @@ const App = () => {
     }
   };
 
+  // get letter for learning
   const get = () => {
     for (let [key, value] of Object.entries(learning)) {
       if (value === 0) {
@@ -74,6 +39,7 @@ const App = () => {
     }
   };
 
+  // check answer and get new letter
   const ans = (key, value) => {
     let a;
     let g = 0;
@@ -130,8 +96,6 @@ const App = () => {
         check(key, a);
       }
     }
-
-    console.log(learning);
   };
 
   const okay = (current, learning) => {
