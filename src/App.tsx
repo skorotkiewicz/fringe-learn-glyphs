@@ -163,9 +163,9 @@ const App = () => {
           )}
         </div>
       ) : (
-        <div>
+        <div className="dialog">
           {current.length === 0 && (
-            <div className="dialog">
+            <div>
               <h4>Intro</h4>
               <p>
                 At the beginning the first 3 Glyphs are shown for learning
@@ -174,22 +174,22 @@ const App = () => {
               </p>
             </div>
           )}
-          {current[0] && (
-            <div
-              className={`dialog ${
-                alert === 0 ? "red" : alert === 1 ? "green" : ""
-              }`}
-            >
-              <img
-                src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
-                alt="glyph"
-              />
-              {import.meta.env.DEV && <em>({current[0]}) </em>}
-              {current[1] === 0 && <h1>{current[0]}</h1>}
-            </div>
-          )}
 
-          <div className="dialog">
+          <div className="dialog-content">
+            {current[0] && (
+              <>
+                <img
+                  className={`${
+                    alert === 0 ? "red" : alert === 1 ? "green" : ""
+                  }`}
+                  src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
+                  alt="glyph"
+                />
+                {import.meta.env.DEV && <em>({current[0]}) </em>}
+                {current[1] === 0 && <h1>{current[0]}</h1>}
+              </>
+            )}
+
             {current[1] > 0 && (
               <input
                 type="text"
@@ -203,6 +203,7 @@ const App = () => {
             )}
 
             <button
+              className={`${current[1] === 0 ? "newLetterBtn" : ""}`}
               onClick={() => {
                 okay(current, learning);
               }}
@@ -212,17 +213,30 @@ const App = () => {
           </div>
         </div>
       )}
-      <h3 style={{ letterSpacing: "5pt" }}>
-        {learning && Object.keys(learning).toString()}
-      </h3>
-      {import.meta.env.DEV && JSON.stringify(learning).toString()}
-
       {start && (
-        <div className="percentage">
-          <progress value={percentage} max="100">
-            {percentage}%
-          </progress>
-          {percentage}%
+        <div className="stats">
+          <h3 style={{ letterSpacing: "5pt" }}>
+            {learning && Object.keys(learning).toString()}
+          </h3>
+          {import.meta.env.DEV && JSON.stringify(learning).toString()}
+
+          {Number(percentage) > 100 ? (
+            <div>
+              <em>Freely repeat all the letters you already know</em>
+            </div>
+          ) : (
+            <div>
+              <div className="percentage">
+                <progress value={percentage} max="100">
+                  {percentage}%
+                </progress>
+                {percentage}%
+              </div>
+              <div>
+                Level: {Math.max(1, Number(percentage) / 10).toFixed(0)}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
