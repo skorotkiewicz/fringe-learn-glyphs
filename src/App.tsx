@@ -53,6 +53,7 @@ const App = () => {
     const check = (key: string, a: any) => {
       if (answer.toUpperCase() === key) {
         console.log("OK");
+        setAlert(1);
 
         if (
           value === 4 &&
@@ -63,8 +64,12 @@ const App = () => {
           addNew(1);
         }
 
-        setCurrent([a[0], a[1]]);
-        setLearning((prev) => ({ ...prev, [key]: value + 1 }));
+        setTimeout(() => {
+          setCurrent([a[0], a[1]]);
+          setLearning((prev) => ({ ...prev, [key]: value + 1 }));
+
+          setAlert(-1);
+        }, 300);
       } else {
         if (answer && value !== 0) setAlert(0);
 
@@ -76,7 +81,7 @@ const App = () => {
           }
 
           setAlert(-1);
-        }, 500);
+        }, 900);
       }
 
       setAnswer("");
@@ -108,7 +113,7 @@ const App = () => {
   };
 
   return (
-    <div className={`container ${alert === 0 ? "red" : ""}`}>
+    <div className="container">
       {!start ? (
         <button
           onClick={() => {
@@ -121,7 +126,11 @@ const App = () => {
       ) : (
         <div>
           {current[0] && (
-            <div className="dialog">
+            <div
+              className={`dialog ${
+                alert === 0 ? "red" : alert === 1 ? "green" : ""
+              }`}
+            >
               <img
                 src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
                 alt="glyph"
