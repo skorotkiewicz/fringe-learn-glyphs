@@ -6,7 +6,7 @@ const App = () => {
   const [start, setStart] = useState(false);
   const [learning, setLearning] = useState({});
   const [added, setAdded] = useState({});
-  const [current, setCurrent] = useState([]);
+  const [current, setCurrent]: any = useState([]);
   const [answer, setAnswer] = useState("");
   const [alert, setAlert] = useState(-1);
 
@@ -41,8 +41,8 @@ const App = () => {
   };
 
   // check answer and get new letter
-  const ans = (key, value) => {
-    let a;
+  const ans = (key: string, value: number) => {
+    let a: any;
     let g = 0;
 
     const rand = () => {
@@ -50,7 +50,7 @@ const App = () => {
       a = keys[Math.floor(Math.random() * keys.length)];
     };
 
-    const check = (key, a) => {
+    const check = (key: string, a: any) => {
       if (answer.toUpperCase() === key) {
         console.log("OK");
 
@@ -99,7 +99,7 @@ const App = () => {
     }
   };
 
-  const okay = (current, learning) => {
+  const okay = (current: any, learning: any) => {
     if (Object.values(learning).includes(0)) {
       get();
     } else {
@@ -108,10 +108,7 @@ const App = () => {
   };
 
   return (
-    <div
-      className="container"
-      style={{ backgroundColor: alert === 0 && "red" }}
-    >
+    <div className={`container ${alert === 0 ? "red" : ""}`}>
       {!start ? (
         <button
           onClick={() => {
