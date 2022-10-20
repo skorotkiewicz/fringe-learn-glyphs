@@ -182,7 +182,7 @@ const App = () => {
                   className={`${
                     alert === 0 ? "red" : alert === 1 ? "green" : ""
                   }`}
-                  src={"glyphs/" + current[0] + ".jpg"}
+                  src={"glyphs/" + current[0].toUpperCase() + ".jpg"}
                   alt="glyph"
                 />
                 {import.meta.env.DEV && <em>({current[0]}) </em>}
