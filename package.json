@@ -1,0 +1,30 @@
+{
+  "name": "fringe-learn-glyphs",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "moment": "^2.29.4",
+    "nanoid": "^4.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
+    "react-simple-ellipsis": "^1.0.8",
+    "sass": "^1.53.0"
+  },
+  "devDependencies": {
+    "@types/clientjs": "^0.2.0",
+    "@types/gun": "^0.9.3",
+    "@types/node": "^18.6.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^2.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.0.0"
+  }
+}
