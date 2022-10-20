@@ -14,6 +14,19 @@ const App = () => {
 
   const keys = Object.entries(stats); // keys
 
+  const save = () => {
+    localStorage.setItem(
+      "storage",
+      JSON.stringify({
+        start: start,
+        learning: learning,
+        added: added,
+        current: current,
+        progress: progress,
+      })
+    );
+  };
+
   // Add new letter to learning object store
   const addNew = (howManyNew = 3) => {
     let count = 0;
@@ -54,6 +67,8 @@ const App = () => {
     };
 
     const check = (key: string, a: any) => {
+      save();
+
       if (answer.toUpperCase() === key) {
         // console.log("OK");
         setAlert(1);
@@ -120,14 +135,33 @@ const App = () => {
   return (
     <div className="container">
       {!start ? (
-        <button
-          onClick={() => {
-            setStart(true);
-            addNew();
-          }}
-        >
-          Start
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              setStart(true);
+              addNew();
+            }}
+          >
+            Start
+          </button>
+
+          {localStorage.getItem("storage") && (
+            <button
+              onClick={() => {
+                const storage: any = localStorage.getItem("storage");
+                const data = JSON.parse(storage);
+
+                setStart(data.start);
+                setLearning(data.learning);
+                setAdded(data.added);
+                setCurrent(data.current);
+                setProgress(data.progress);
+              }}
+            >
+              Continue
+            </button>
+          )}
+        </div>
       ) : (
         <div>
           {current.length === 0 && (
