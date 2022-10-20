@@ -30,10 +30,12 @@ main {
 
 .red {
   border-color: red !important;
+  animation: shake 0.1s;
 }
 
 .green {
   border-color: greenyellow !important;
+  animation: zoom 0.3s;
 }
 
 .newLetterBtn {
@@ -64,7 +66,6 @@ main {
   }
 
   .stats {
-    // border: 3px solid #e6ecf9;
     background-color: #fff;
     padding: 10px;
     border-radius: 0.5rem;
@@ -158,4 +159,28 @@ header {
   background-color: #fff;
   padding: 10px;
   z-index: 2;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(-15px, 0px);
+  }
+  50% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(15px, 0px);
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.02, 1.02);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }

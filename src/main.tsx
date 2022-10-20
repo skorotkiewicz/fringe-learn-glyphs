@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         <App />
       </main>
       <footer>
-        <div>Alpha v0.0.1</div>
+        <div>Alpha v0.0.2</div>
       </footer>
     </div>
   </React.StrictMode>
