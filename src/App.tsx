@@ -9,6 +9,8 @@ const App = () => {
   const [current, setCurrent]: any = useState([]);
   const [answer, setAnswer] = useState("");
   const [alert, setAlert] = useState(-1);
+  const [progress, setProgress] = useState(0);
+  let percentage = ((100 * progress) / 260).toFixed(2);
 
   const keys = Object.entries(stats); // keys
 
@@ -34,6 +36,7 @@ const App = () => {
       if (value === 0) {
         setCurrent([key, value]);
         setLearning((prev) => ({ ...prev, [key]: 1 }));
+        setProgress((prev) => prev + 1);
 
         break;
       }
@@ -67,6 +70,7 @@ const App = () => {
         setTimeout(() => {
           setCurrent([a[0], a[1]]);
           setLearning((prev) => ({ ...prev, [key]: value + 1 }));
+          setProgress((prev) => prev + 1);
 
           setAlert(-1);
         }, 300);
@@ -78,6 +82,7 @@ const App = () => {
 
           if (answer && value !== 0) {
             setLearning((prev) => ({ ...prev, [key]: Math.max(0, value - 1) }));
+            setProgress((prev) => Math.max(0, prev - 1));
           }
 
           setAlert(-1);
@@ -125,6 +130,16 @@ const App = () => {
         </button>
       ) : (
         <div>
+          {current.length === 0 && (
+            <div className="dialog">
+              <h4>Intro</h4>
+              <p>
+                At the beginning the first 3 Glyphs are shown for learning
+                purposes, if you answer 5 times correctly for a given Glyph a
+                new Glyph is added.
+              </p>
+            </div>
+          )}
           {current[0] && (
             <div
               className={`dialog ${
@@ -167,6 +182,15 @@ const App = () => {
         {learning && Object.keys(learning).toString()}
       </h3>
       {import.meta.env.DEV && JSON.stringify(learning).toString()}
+
+      {start && (
+        <div className="percentage">
+          <progress value={percentage} max="100">
+            {percentage}%
+          </progress>
+          {percentage}%
+        </div>
+      )}
     </div>
   );
 };
