@@ -108,63 +108,57 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <header>Fringe Learn Glyphs</header>
-      <main>
-        <div
-          className="container"
-          style={{ backgroundColor: alert === 0 && "red" }}
+    <div
+      className="container"
+      style={{ backgroundColor: alert === 0 && "red" }}
+    >
+      {!start ? (
+        <button
+          onClick={() => {
+            setStart(true);
+            addNew();
+          }}
         >
-          {!start ? (
-            <button
-              onClick={() => {
-                setStart(true);
-                addNew();
-              }}
-            >
-              Start
-            </button>
-          ) : (
+          Start
+        </button>
+      ) : (
+        <div>
+          {current[0] && (
             <div>
-              {current[0] && (
-                <div>
-                  <img
-                    src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
-                    alt="glyph"
-                  />
-                  <em>({current[0]}) </em>
-                </div>
-              )}
-
-              {current[1] === 0 && <h1>{current[0]}</h1>}
-
-              {current[1] > 0 && (
-                <input
-                  type="text"
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") okay(current, learning);
-                  }}
-                />
-              )}
-
-              <button
-                onClick={() => {
-                  okay(current, learning);
-                }}
-              >
-                Okay
-              </button>
+              <img
+                src={"glyphs/" + current[0].toLowerCase() + ".jpg"}
+                alt="glyph"
+              />
+              {import.meta.env.DEV && <em>({current[0]}) </em>}
             </div>
           )}
-          <h3 style={{ letterSpacing: "5pt" }}>
-            {learning && Object.keys(learning).toString()}
-          </h3>
-          {/* {JSON.stringify(learning).toString()} */}
+
+          {current[1] === 0 && <h1>{current[0]}</h1>}
+
+          {current[1] > 0 && (
+            <input
+              type="text"
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") okay(current, learning);
+              }}
+            />
+          )}
+
+          <button
+            onClick={() => {
+              okay(current, learning);
+            }}
+          >
+            Okay
+          </button>
         </div>
-      </main>
-      <footer>Alpha v0.0.1</footer>
+      )}
+      <h3 style={{ letterSpacing: "5pt" }}>
+        {learning && Object.keys(learning).toString()}
+      </h3>
+      {import.meta.env.DEV && JSON.stringify(learning).toString()}
     </div>
   );
 };
